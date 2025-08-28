@@ -1,0 +1,49 @@
+<!--pages/login/login.wxml-->
+<view class="login-container">
+  <view class="header">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="title">配送人员登记系统</text>
+    <text class="subtitle">欢迎使用配送管理系统</text>
+  </view>
+
+  <view class="login-content">
+    <view class="welcome-text">
+      <text>请登录以开始使用配送登记功能</text>
+    </view>
+
+    <view class="login-buttons">
+      <button 
+        wx:if="{{canIUseGetUserProfile}}" 
+        class="login-btn primary" 
+        bindtap="getUserProfile"
+        open-type="getUserInfo"
+      >
+        <image class="btn-icon" src="/images/wechat.png" mode="aspectFit"></image>
+        微信一键登录
+      </button>
+
+      <button 
+        wx:else 
+        class="login-btn primary" 
+        bindtap="getUserProfile"
+        open-type="getUserInfo"
+      >
+        <image class="btn-icon" src="/images/wechat.png" mode="aspectFit"></image>
+        微信一键登录
+      </button>
+
+      <button class="login-btn secondary" bindtap="enterAsGuest">
+        <image class="btn-icon" src="/images/guest.png" mode="aspectFit"></image>
+        游客模式体验
+      </button>
+      
+      <!-- 开发环境专用按钮，正式版不显示 -->
+      <button 
+        wx:if="{{__wxConfig.envVersion === 'develop'}}" 
+        class="login-btn debug" 
+        bindtap="clearLocalLoginStatus"
+      >
+        <image class="btn-icon" src="/images/icons/close.png" mode="aspectFit"></image>
+        清理登录状态（测试用）
+      </button>
+    </view>
