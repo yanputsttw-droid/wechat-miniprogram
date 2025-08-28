@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 用户信息栏 -->
+  <view class="user-header" wx:if="{{userInfo}}">
+    <image class="user-avatar" src="{{userInfo.avatarUrl || '../../images/avatar.png'}}"></image>
+    <view class="user-info">
+      <text class="user-name">{{userInfo.name || userInfo.nickName || '用户'}}</text>
+      <text class="user-welcome">欢迎使用配送登记系统</text>
+    </view>
+  </view>
+
+  <!-- 扫码功能区域 -->
+  <view class="scan-section">
+    <view class="scan-title">扫码登记配送信息</view>
+    <view class="scan-desc">请扫描订单二维码进行配送登记</view>
+    
+    <button class="scan-btn" bindtap="scanQRCode" disabled="{{processing}}">
+      <image class="scan-icon" src="../../images/qr-code.svg" wx:if="{{!processing}}"></image>
+      <text wx:if="{{!processing}}">开始扫码</text>
+      <text wx:if="{{processing}}">处理中...</text>
+    </button>
+  </view>
+
+  <!-- 处理结果展示 -->
+  <view class="result-section" wx:if="{{scanResult}}">
+    <view class="result-title">扫码结果</view>
+    <view class="result-content">
+      <text class="result-text">{{scanResult}}</text>
+    </view>
+    
+    <view class="scan-info" wx:if="{{scanData}}">
+      <view class="info-item">
+        <text class="info-label">状态：</text>
+        <text class="info-value success" wx:if="{{success}}">接单成功</text>
+        <text class="info-value error" wx:if="{{error}}">{{error}}</text>
+      </view>
+    </view>
+    
+    <button class="reset-btn" bindtap="resetScan" wx:if="{{!processing}}">重新扫码</button>
+  </view>
+
+
+
+</view>
